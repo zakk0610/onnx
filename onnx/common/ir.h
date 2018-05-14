@@ -410,6 +410,8 @@ private:
   std::string name_;
   bool has_doc_string_;
   std::string doc_string_;
+  bool has_domain_;
+  std::string domain_;
 
 protected:
   Node(Graph * graph_, NodeKind kind_); //defined after graph
@@ -434,6 +436,16 @@ public:
   void setDocString(std::string doc_string) {
     has_doc_string_ = true;
     doc_string_ = std::move(doc_string);
+  }
+  bool has_domain() const {
+    return has_domain_;
+  }
+  const std::string& domain() {
+    return domain_;
+  }
+  void setDomain(std::string domain) {
+    has_domain_ = true;
+    domain_ = std::move(domain);
   }
   NodeKind kind() const {
     return kind_;
@@ -1036,7 +1048,8 @@ inline Node::Node(Graph * graph_, NodeKind kind_) :
   graph_(graph_),
   stage_(graph_->new_node_stage_),
   has_name_(false),
-  has_doc_string_(false) {
+  has_doc_string_(false),
+  has_domain_(false) {
   graph_->all_nodes.emplace(this);
 }
 

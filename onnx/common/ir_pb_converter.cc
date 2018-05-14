@@ -252,6 +252,9 @@ std::unique_ptr<Graph> graphProtoToGraph(const ONNX_NAMESPACE::GraphProto& gp, b
     if (np.has_name()) {
       n->setName(np.name());
     }
+    if (np.has_domain()) {
+     n->setDomain(np.domain());
+    }
   }
 
   for (auto n : g->nodes()) {
@@ -518,6 +521,9 @@ void encodeGraph(ONNX_NAMESPACE::GraphProto * p_g, const std::shared_ptr<Graph> 
     }
     if (node->has_name()) {
       p_n->set_name(node->name());
+    }
+    if (node->has_domain()) {
+      p_n->set_domain(node->domain());
     }
   }
 
